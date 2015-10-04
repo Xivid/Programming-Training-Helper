@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8"> 
+		<title>SSECTA</title>
+		<link href="{% static 'bootstrap.min.css' %}" rel="stylesheet" media="screen">
+	</head>
+
+	<body style="background-color:#eeeeee;padding-top:50px">
+		<nav class="navbar navbar-collapse navbar-fixed-top" role="navigation" style="background-color:#2980b9;color:#fff;padding-left:100px">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="bs-navbar-collapse" >
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/" style="color:#fff">SSECTA</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li ><p class="navbar-text">您好！　</p></li>
+					<li ><p class="navbar-text"><b>{{navusername}}</b></p></li>
+					<form class="navbar-form navbar-left" role="search" action="/show/">
+						<div class="form-group">
+							{% csrf_token %}
+							<input type="text" class="form-control" placeholder="输入题号（带字母）" value="" name = "qname">
+						</div>
+						<button type="submit" class="btn btn-default">查看</button>
+					</form>
+				</ul>
+				<ul class="nav navbar-nav navbar-right" >
+					{% if canpublish %}
+						<li><a href="/accounts/realauth/" style="color:#fff">实名认证</a></li>
+						<li class="active"><a href="/post/" style="color:#fff">发布解题指导</a></li>
+					{% endif %}
+					<li><a href="/accounts/userinfo/?id={{navuserid}}" style="color:#fff">个人信息</a></li>
+					<li><a href="/accounts/logout/" style="color:#fff">登出</a></li>
+					<li><a href="/help/" style="color:#fff">帮助&留言</a></li>
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</nav>
+		<header class="jumbotron subhead" id="overview" style="background-color:#3498db;color:#fff">
+			<div class="container">
+				<h1>SSECTA</h1>
+				<p>HIT SSE C语言Train 训练助手</p>
+			</div>
+		</header>
+
+		<div class="containter">
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+					<h2 align="center">发布解题指导</h2>
+					{% if published %}
+					<h4 class="text-success" align="center">已经发布！<a href="/show/?qname={{qname}}" >点击查看</a></h4> 
+					{% else %}
+					<h4 align="center">发布前请确认此题尚未被发布过！</h4>
+					{% endif %}
+					<form method="post" class="form-horizontal " role="form">
+						{% csrf_token %}
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="qname">本题编号：</label>
+							<div class="col-sm-10">
+								<input type="text" name="qname" {% if hasname %} value="{{hasname}}" {% endif %} class="form-control" placeholder="题号">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="qdesc">题目描述：</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="5" name="qdesc"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="qhint">注意事项：</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="5" name="qhint"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="qiformat">输入格式：</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="5" name="qiformat"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="qoformat">输出格式：</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="5" name="qoformat"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="qinsample">样例输入：</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="5" name="qinsample"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="qoutsample">样例输出：</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="5" name="qoutsample"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="qsolution">解题思路：</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="5" name="qsolution"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="qcode">官方代码：</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="5" name="qcode"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="qmycode">民间代码：</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="5" name="qmycode"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-1 col-sm-offset-5">
+								<button type="submit" class="btn btn-default">提交</button>
+							</div>
+							<div class="col-sm-1 col-sm-offset-1">
+								<button type="reset" class="btn btn-default">重置</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<footer class="bs-footer containter " role="contentinfo" style="background-color:#eeeeee">
+			<div class="container">
+				<h4 align="center">CS2013@HIT <a href="http://yumendy.com/">段艺</a> <a href="http://vivid.name/">杨志飞</a> ©2014</h4>
+			</div>
+		</footer>
+	</body>
+</html>

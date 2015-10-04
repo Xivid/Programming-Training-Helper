@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8"> 
+		<title>SSECTA</title>
+		<link href="{% static 'bootstrap.min.css' %}" rel="stylesheet" media="screen">
+	</head>
+
+	<body style="background-color:#eeeeee;padding-top:50px">
+	<nav class="navbar navbar-collapse navbar-fixed-top" role="navigation" style="background-color:#2980b9;color:#fff;padding-left:100px">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="bs-navbar-collapse" >
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/" style="color:#fff">SSECTA</a>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li ><p class="navbar-text">您好！　</p></li>
+				<li ><p class="navbar-text"><b>{{navusername}}</b></p></li>
+				<form class="navbar-form navbar-left" role="search" action="/show/">
+					<div class="form-group">
+						{% csrf_token %}
+						<input type="text" class="form-control" placeholder="输入题号（带字母）" value="" name = "qname">
+					</div>
+					<button type="submit" class="btn btn-default">查看</button>
+				</form>
+			</ul>
+			<ul class="nav navbar-nav navbar-right" >
+				{% if canpublish %}
+					<li><a href="/accounts/realauth/" style="color:#fff">实名认证</a></li>
+					<li><a href="/post/" style="color:#fff">发布解题指导</a></li>
+				{% endif %}
+				<li><a href="/accounts/userinfo/?id={{navuserid}}" style="color:#fff">个人信息</a></li>
+				<li><a href="/accounts/logout/" style="color:#fff">登出</a></li>
+				<li><a href="/help/" style="color:#fff">帮助&留言</a></li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</nav>
+	<header class="jumbotron subhead" id="overview" style="background-color:#3498db;color:#fff">
+		<div class="container">
+			<h1>SSECTA</h1>
+			<p>HIT SSE C语言Train 训练助手</p>
+		</div>
+	</header>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2 table-responsive">
+				<h1 align="center">本站说明</h1>
+				<br>
+				<h1 align="center">计院维护，全校共享</h1>
+				<br>
+				<h2 align="center">实名认证【姓名、学号】可发布题解</h2>
+				<br>
+				<h4 align="center">提供正规题目描述（包括输入输出格式、样例和注意事项）、<br>解题思路、参考代码（包括官方代码和民间AC代码）</h4>
+				<br>
+				<h5 align="center">关于题号首字母：Q代表SSE Train习题，H代表HOJ题目，C代表乐学网题目（C后面的数字为题目在乐学网中的id，如https://cms.hit.edu.cn/mod/assignment/view.php?id=6424的id是6424）</h5>
+				<br><br>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2 table-responsive">
+				<!-- Duoshuo Comment BEGIN -->
+				<div class="ds-thread"></div>
+				<script type="text/javascript">
+				var duoshuoQuery = {short_name:"ssecta"};
+					(function() {
+						var ds = document.createElement('script');
+						ds.type = 'text/javascript';ds.async = true;
+						ds.src = 'http://static.duoshuo.com/embed.js';
+						ds.charset = 'UTF-8';
+						(document.getElementsByTagName('head')[0] 
+						|| document.getElementsByTagName('body')[0]).appendChild(ds);
+					})();
+					</script>
+				<!-- Duoshuo Comment END -->
+			</div>
+		</div>
+	</div>
+		<footer class="bs-footer" role="contentinfo" style="background-color:#eeeeee">
+		<div class="container">
+		<h4 align="center">CS2013@HIT <a href="http://yumendy.com/">段艺</a> <a href="http://vivid.name/">杨志飞</a> ©2014</h4>
+		</div>
+		</footer>
+	</body>
+</html>

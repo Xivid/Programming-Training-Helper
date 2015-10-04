@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>修改解题指导</title>
+</head>
+<body>
+<form method="POST">
+<table width="709" border="0">
+  <tr>
+    {% if published %}<td><font color="red">修改成功！</font></td>{% endif %}
+    <td height="76" colspan="2"><div align="right"><a href="/"> 回到主页 </a> </div></td>
+  </tr>
+  <tr>
+    <td width="95">本题编号：</td>
+    <td width="604">{{qname}} <br />如果你是Publisher，建议你只修改“参考代码”部分，在其中加入你自己的代码，用人工分割线隔开！</td>
+  </tr>
+  <tr>
+    <td height="420">题目描述：</td>
+    <td><textarea name="qdesc" style="width: 600px; height:400px; resize: none;" >{{qdesc}}</textarea></td>
+  </tr>
+  <tr>
+    <td style="color: #C00;"><p>注意事项：</p>
+      <p>（重要！）</p></td>
+    <td><textarea name="qhint" style="width: 600px; height:200px; resize: none;" >{{qhint}}</textarea></td>
+  </tr>
+  <tr>
+    <td>输入格式：</td>
+    <td><textarea name="qiformat" style="width: 600px; height:200px; resize: none;" >{{qiformat}}</textarea></td>
+  </tr>
+  <tr>
+    <td>输出格式：</td>
+    <td><textarea name="qoformat" style="width: 600px; height:200px; resize: none;" >{{qoformat}}</textarea></td>
+  </tr>  
+  <tr>
+    <td>样例输入：</td>
+    <td><textarea name="qinsample" style="width: 600px; height:200px; resize: none;" >{{qinsample}}</textarea></td>
+  </tr>
+  <tr>
+    <td>样例输出：</td>
+    <td><textarea name ="qoutsample" style="width: 600px; height:200px; resize: none;" >{{qoutsample}}</textarea></td>
+  </tr>
+   <tr>
+    <td>解题思路：</td>
+    <td><textarea name ="qsolution" style="width: 600px; height:400px; resize: none;" >{{qsolution}}</textarea></td>
+  </tr>
+  <tr>
+    <td>官方代码：</td>
+    <td><textarea name ="qcode" style="width: 600px; height:400px; resize: none;" >{{qcode}}</textarea></td>
+  </tr>
+  <tr>
+    <td>民间代码：</td>
+    <td><textarea name ="qmycode" style="width: 600px; height:400px; resize: none;" >{{qmycode}}</textarea></td>
+  </tr>
+  <tr>
+  	<td colspan="2"><div align="center">
+  	  <input type="submit" value="提交" />  	  
+  	  <input type="reset" value="重写" />
+	  </div></td>
+  	</tr>
+</table>
+</form>
+</body>
+</html>

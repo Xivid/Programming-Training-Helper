@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8"> 
+		<title>SSECTA</title>
+		<link href="{% static 'bootstrap.min.css' %}" rel="stylesheet" media="screen">
+	</head>
+
+	<body style="background-color:#eeeeee;padding-top:50px">
+	<nav class="navbar navbar-collapse navbar-fixed-top" role="navigation" style="background-color:#2980b9;color:#fff;padding-left:100px">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="bs-navbar-collapse" >
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/" style="color:#fff">SSECTA</a>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li ><p class="navbar-text">您好！　</p></li>
+				<li ><p class="navbar-text"><b>{{navusername}}</b></p></li>
+				<form class="navbar-form navbar-left" role="search" action="/show/">
+					<div class="form-group">
+						{% csrf_token %}
+						<input type="text" class="form-control" placeholder="输入题号（带字母）" value="" name = "qname">
+					</div>
+					<button type="submit" class="btn btn-default">查看</button>
+				</form>
+			</ul>
+			<ul class="nav navbar-nav navbar-right" >
+				{% if canpublish %}
+					<li><a href="/accounts/realauth/" style="color:#fff">实名认证</a></li>
+					<li><a href="/post/" style="color:#fff">发布解题指导</a></li>
+				{% endif %}
+				<li><a href="/accounts/userinfo/?id={{navuserid}}" style="color:#fff">个人信息</a></li>
+				<li><a href="/accounts/logout/" style="color:#fff">登出</a></li>
+				<li><a href="/help/" style="color:#fff">帮助&留言</a></li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</nav>
+	<header class="jumbotron subhead" id="overview" style="background-color:#3498db;color:#fff">
+		<div class="container">
+			<h1>SSECTA</h1>
+			<p>HIT SSE C语言Train 训练助手</p>
+		</div>
+	</header>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2 table-responsive">
+				<table class="table table-bordered">
+					<tr height="50">
+						<td width="50">序号</td>
+						<td width="60">用户ID</td>
+						<td width="150">学号</td>
+						<td width="150">姓名</td>
+						<td width="150">状态</td>
+						<td width="200">操作</td>
+					</tr>
+				{% for user in userlist %}
+					<tr height="50">
+						<td width="50">{{user.id}}</td>
+						<td width="60">{{user.user.id}}</td>
+						<td width="150">{{user.identity}}</td>
+						<td width="150">{{user.name}}</td>
+						<td width="150">{% if user.is_active %}OK{% else %}Pending{% endif %}</td>
+						<td width="200"><a href='?action=accept&id={{user.id}}' class="btn btn-success" role="button" style="margin-right:25px;margin-left:15px;">Accept</a><a href='?action=decline&id={{user.id}}' class="btn btn-danger" role="button">Delete</a></td>
+					</tr>
+				{% endfor %}
+				</table>
+
+				<br><br>
+			</div>
+		</div>
+		
+	</div>
+		<footer class="bs-footer" role="contentinfo" style="background-color:#eeeeee">
+		<div class="container">
+		<h4 align="center">CS2013@HIT <a href="http://hitcsdy.sinaapp.com/">段艺</a> <a href="http://vivid.name/">杨志飞</a> ©2014</h4>
+		</div>
+		</footer>
+	</body>
+</html>

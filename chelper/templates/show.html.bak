@@ -1,0 +1,72 @@
+<html>
+<head><title>查看解题指导</title></head>
+<body>
+{%if notfound%}
+<p>
+对不起，这道题还没有被收录。
+{% if canpublish %}
+<a href="/post/?qname={{qname}}">点此添加本题解题指导！</a>
+{% endif %}
+</p>
+{%else%}
+{%if canpublish%}
+<a href="/edit/?id={{qid}}">修改本题</a>
+{% endif %}
+{%if isadmin %}
+ <a href="/delete/?id={{qid}}">删除本题</a>
+{% endif %}
+ <a href="/">返回主页</a>
+ <a href="/all/">返回全部</a>
+<table width="827" border="1">
+  <tr>
+    <td width="88">本题编号：</td>
+    <td width="723">{{qname}}（已被浏览{{viewcount}}次）</td>
+  </tr>
+  <tr>
+    <td>题目描述：</td>
+    <td><pre>{{qdesc}}</pre></td>
+  </tr>
+  <tr>
+    <td style="color: #C00;"><p>注意事项：</p><p>（重要！）</p></td>
+    <td><pre>{{qhint}}</pre></td>
+  </tr>
+  <tr>
+    <td>输入格式：</td>
+    <td><pre>{{qiformat}}</pre></td>
+  </tr>
+  <tr>
+    <td>输出格式：</td>
+    <td><pre>{{qoformat}}</pre></td>
+  </tr>
+  <tr>
+    <td>样例输入：</td>
+    <td><pre>{{qinsample}}</pre></td>
+  </tr>
+  <tr>
+  	<td>样例输出：</td>
+    <td><pre>{{qoutsample}}</pre></td>
+  </tr>
+  <tr>
+  	<td>解题思路：</td>
+    <td><pre>{{qsolution}}</pre></td>
+  </tr>
+  <tr>
+  	<td>官方代码：</td>
+    <td><pre>{{qcode}}</pre></td>
+  </tr>
+  <tr>
+  	<td>民间代码（一般正确）：</td>
+    <td><pre>{{qmycode}}</pre></td>
+  </tr>
+  <tr>
+  	<td>创建者：</td>
+    <td><a href="{{creatorurl}}">{{creator}}</a></td>
+  </tr>
+  <tr>
+  	<td>编辑者：</td>
+    <td>{{editor}}</td>
+  </tr>
+</table>
+{%endif%}
+</body>
+</html>

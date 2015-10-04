@@ -1,0 +1,10 @@
+{% if success %}
+删除成功<br />
+<a href="/">返回主页</a>
+{% else %}
+<form method="POST">
+<p>真的要删除吗？</p>
+<input type="radio" name="confirm" value="yes" />是 <input type="radio" name="confirm" value="no" checked="checked" />否 <br />
+<input type="submit"/> <input type="reset" />
+</form>
+{% endif %}

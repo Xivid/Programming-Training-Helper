@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8"> 
+		<title>SSECTA</title>
+		<link href="{% static 'bootstrap.min.css' %}" rel="stylesheet" media="screen">
+	</head>
+
+	<body style="background-color:#eeeeee;padding-top:50px">
+		<nav class="navbar navbar-collapse navbar-fixed-top" role="navigation" style="background-color:#2980b9;color:#fff;padding-left:100px">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="bs-navbar-collapse" >
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/" style="color:#fff">SSECTA</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li ><p class="navbar-text">您好！　</p></li>
+					<li ><p class="navbar-text"><b>{{navusername}}</b></p></li>
+					<form class="navbar-form navbar-left" role="search" action="/show/">
+						<div class="form-group">
+							{% csrf_token %}
+							<input type="text" class="form-control" placeholder="输入题号（带字母）" value="" name = "qname">
+						</div>
+						<button type="submit" class="btn btn-default">查看</button>
+					</form>
+				</ul>
+				<ul class="nav navbar-nav navbar-right" >
+					{% if canpublish %}
+						<li><a href="/accounts/realauth/" style="color:#fff">实名认证</a></li>
+						<li class="active"><a href="/post/" style="color:#fff">发布解题指导</a></li>
+					{% endif %}
+					<li><a href="/accounts/userinfo/?id={{navuserid}}" style="color:#fff">个人信息</a></li>
+					<li><a href="/accounts/logout/" style="color:#fff">登出</a></li>
+					<li><a href="/help/" style="color:#fff">帮助&留言</a></li>
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</nav>
+		<header class="jumbotron subhead" id="overview" style="background-color:#3498db;color:#fff">
+			<div class="container">
+				<h1>SSECTA</h1>
+				<p>HIT SSE C语言Train 训练助手</p>
+			</div>
+		</header>
+
+		<div class="container">
+			<div class="row" align="center">
+				<div class="col-sm-8 col-sm-offset-2">
+					{%if notfound%}
+						<h3 class="text-danger">
+						对不起，这道题还没有被收录。
+						{% if canpublish %}
+							<div class="row"><a href="/post/?qname={{qname}}">点此添加本题解题指导！</a></div>
+						{% else %}
+							<div class="row"><a href="/accounts/realauth/">也想添加题解？点此实名认证吧！</a></div>
+						{% endif %}
+						</h3>
+					{%else%}
+						{%if canpublish%}
+							<a class="btn btn-info" href="/edit/?id={{qid}}" role="button">修改本题</a>
+						{% endif %}
+							<a class="btn btn-info" href="/" role="button">返回首页</a>
+							<a class="btn btn-info" href="/all/" role="button">返回全部</a>
+						{%if isadmin %}
+							<a class="btn btn-danger" href="/delete/?id={{qid}}" role="button">删除本题</a>
+						{% endif %}
+					{% endif %}
+				</div>
+			</div>
+			{%if not notfound%}
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+					<h3 align="center">{{qname}}</h3>
+					<h4 align="center">（已被浏览{{viewcount}}次）</h4>		
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="qdesc">题目描述：</label>
+						<div class="col-sm-10">
+							<pre class="pre-scrollable" name="qdesc">{{qdesc}}</pre>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label taxt-danger" for="qhint">注意事项：</label>
+						<div class="col-sm-10">
+							<pre class="pre-scrollable" name="qhint">{{qhint}}</pre>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="qiformat">输入格式：</label>
+						<div class="col-sm-10">
+							<pre class="pre-scrollable" name="qiformat">{{qiformat}}</pre>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="qoformat">输出格式：</label>
+						<div class="col-sm-10">
+							<pre class="pre-scrollable" name="qoformat">{{qoformat}}</pre>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="qinsample">样例输入：</label>
+						<div class="col-sm-10">
+							<pre class="pre-scrollable" name="qinsample">{{qinsample}}</pre>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="qoutsample">样例输出：</label>
+						<div class="col-sm-10">
+							<pre class="pre-scrollable" name="qoutsample">{{qoutsample}}</pre>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="qsolution">解题思路：</label>
+						<div class="col-sm-10">
+							<pre class="pre-scrollable" name="qsolution">{{qsolution}}</pre>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="qcode">官方代码：</label>
+						<div class="col-sm-10">
+							<pre class="pre-scrollable" name="qcode">{{qcode}}</pre>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="qmycode">民间代码：</label>
+						<div class="col-sm-10">
+							<pre class="pre-scrollable" name="qmycode">{{qmycode}}</pre>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="creator">创建者：</label>
+						<div class="col-sm-10">
+							<a  name="creator" href="{{creatorurl}}">{{creator}}</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+					<!-- Duoshuo Comment BEGIN -->
+					<div class="ds-thread"></div>
+					<script type="text/javascript">
+					var duoshuoQuery = {short_name:"ssecta"};
+						(function() {
+							var ds = document.createElement('script');
+							ds.type = 'text/javascript';ds.async = true;
+							ds.src = 'http://static.duoshuo.com/embed.js';
+							ds.charset = 'UTF-8';
+							(document.getElementsByTagName('head')[0] 
+							|| document.getElementsByTagName('body')[0]).appendChild(ds);
+						})();
+						</script>
+					<!-- Duoshuo Comment END -->
+				</div>
+			</div>
+			
+			{%endif%}
+		</div>
+
+		<footer class="bs-footer containter " role="contentinfo" style="background-color:#eeeeee">
+			<div class="container">
+				<h4 align="center">CS2013@HIT <a href="http://yumendy.com/">段艺</a> <a href="http://vivid.name/">杨志飞</a> ©2014</h4>
+			</div>
+		</footer>
+	</body>
+</html>

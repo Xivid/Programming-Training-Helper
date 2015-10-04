@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>添加解题指导</title>
+</head>
+<body>
+<form method="POST">
+<table width="709" border="0">
+  <tr>
+    {% if published %}<td><font color="red">已经发布！</font> <a href="/show/?qname={{qname}}">点击查看</a></td>{% endif %}
+    <td height="76" colspan="2"><div align="right"><a href="/"> 回到主页 </a> </div></td>
+  </tr>
+  <tr>
+    <td colspan="2">发布前请确认此题尚未被发布过！在“快速查看”中搜一下即可！</td>
+  </tr>
+  <tr>
+    <td width="95">本题编号：</td>
+    <td width="604"><input type="text" name="qname" {% if hasname %}value="{{hasname}}" {% endif %}/></td>
+  </tr>
+  <tr>
+    <td height="420">题目描述：</td>
+    <td><textarea name="qdesc" style="width: 600px; height:400px; resize: none;" ></textarea></td>
+  </tr>
+  <tr>
+    <td style="color: #C00;"><p>注意事项：</p>
+      <p>（重要！）</p></td>
+    <td><textarea name="qhint" style="width: 600px; height:200px; resize: none;" ></textarea></td>
+  </tr>
+  <tr>
+    <td>输入格式：</td>
+    <td><textarea name="qiformat" style="width: 600px; height:200px; resize: none;" ></textarea></td>
+  </tr>
+  <tr>
+    <td>输出格式：</td>
+    <td><textarea name="qoformat" style="width: 600px; height:200px; resize: none;" ></textarea></td>
+  </tr>  
+  <tr>
+    <td>样例输入：</td>
+    <td><textarea name="qinsample" style="width: 600px; height:200px; resize: none;" ></textarea></td>
+  </tr>
+  <tr>
+    <td>样例输出：</td>
+    <td><textarea name ="qoutsample" style="width: 600px; height:200px; resize: none;" ></textarea></td>
+  </tr>
+   <tr>
+    <td>解题思路：</td>
+    <td><textarea name ="qsolution" style="width: 600px; height:400px; resize: none;" ></textarea></td>
+  </tr>
+  <tr>
+    <td>官方代码：</td>
+    <td><textarea name ="qcode" style="width: 600px; height:400px; resize: none;" ></textarea></td>
+  </tr>
+  <tr>
+    <td>民间代码：</td>
+    <td><textarea name ="qmycode" style="width: 600px; height:400px; resize: none;" ></textarea></td>
+  </tr>
+  <tr>
+  	<td colspan="2"><div align="center">
+  	  <input type="submit" value="提交" />  	  
+  	  <input type="reset" value="重写" />
+	  </div></td>
+  	</tr>
+</table>
+</form>
+</body>
+</html>

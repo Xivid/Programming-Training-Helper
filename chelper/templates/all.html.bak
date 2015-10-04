@@ -1,0 +1,4 @@
+<a href="/">返回主页</a>
+{% for p in problem_list %}
+<li><a href="/show/?qname={{p.name}}">{{p.name}}（{{p.viewcount}}次浏览）</a></li>
+{%endfor%}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8" /> 
+		<title>SSE C语言训练助手-SSECTA</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
+	</head>
+	<body>
+		<div id="header">
+			<p>您好！　<b>{{username}}</b></p>
+			<ul>
+				{% if canpublish %}
+					<li><a href="/post/">发布解题指导</a></li>
+				{% endif %}
+				<li><a href="/accounts/userinfo/?id={{userid}}">个人信息</a></li>
+				<li><a href="/accounts/logout/">登出</a></li>
+				<li><a href="/help/">本站帮助</a></li>
+			</ul>
+		</div>
+		<div id="main">
+			<div id="top">
+				<div id="left" align="center">
+					<form method="GET" action="/show/"> 
+					<label for="qname">快速查看</label>
+					<input type="text" value="输入题号（带字母）…" name = "qname" onfocus="if(value=='输入题号（带字母）…') {value=''}" onblur="if(value=='') {value='输入题号（带字母）…'}"/>
+					<input type="submit" value="查看" class="button">
+					</form>
+				</div>
+				<div id="right">
+					<h3><span>人家才不会好心的提醒你注意大小写呢喵~</span></h3>
+				</div>
+			</div>
+			<div id="buttom">
+				<table align="center">
+					<tr>
+						<th height="40" colspan="6">按类查看</th>
+					</tr>
+					<tr>
+						<td width="150" height="50"><a href="/all">全部（共{{totalproblemnumber}}题）</a></td>
+						<td width="150">循环控制结构</td>
+						<td width="150">基本类型变量作函数参数</td>
+						<td width="150">数据类型、运算符与表达式</td>
+						<td width="150">键盘输入和屏幕输出</td>
+						<td width="150">选择控制结构</td>
+					</tr>
+					<tr>
+						<td height="50">一维数组作函数参数</td>
+						<td width="150">一维数组</td>
+						<td width="150">二维数组</td>
+						<td width="150">流程转移控制</td>
+						<td width="150">字符数组作函数参数</td>
+						<td width="150">动态数据结构</td>
+					</tr>
+					<tr>
+						<td height="50">结构体</td>
+						<td width="150">字符数组</td>
+						<td width="150">简单指针变量</td>
+						<td width="150">递归函数</td>
+						<td width="150">函数</td>
+						<td width="150">函数指针</td>
+					</tr>
+					<tr>
+						<td height="50">指针变量作函数参数</td>
+						<td width="150">第3章</td>
+						<td width="150">第6章</td>
+						<td width="150">第8章</td>
+						<td width="150">第10章</td>
+						<td width="150">第12章</td>
+					</tr>
+					<tr>
+						<td height="50">变量的作用域和存储类型</td>
+						<td width="150">第7章</td>
+						<td width="150">第5章</td>
+						<td width="150">第4章</td>
+						<td width="150">动态内存分配</td>
+						<td width="150">第9章</td>
+					</tr>
+					<tr>
+						<td height="50">指针数组</td>
+						<td>二维数组做函数参数</td>
+						<td>字符指针作函数参数</td>
+						<td>第11章</td>
+						<td>动态数组</td>
+						<td>实验</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="footer">
+    		<h3 align="center">CS2013@HIT <a href="http://hitcsdy.sinaapp.com/">段艺</a> <a href="http://vivid.name/">杨志飞</a> ©2014</h3>
+   		</div>
+	</body>
+</html>	

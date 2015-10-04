@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8"> 
+		<title>SSECTA</title>
+		<link href="{% static 'bootstrap.min.css' %}" rel="stylesheet" media="screen">
+	</head>
+
+	<body style="background-color:#eeeeee;padding-top:50px">
+	<nav class="navbar navbar-collapse navbar-fixed-top" role="navigation" style="background-color:#2980b9;color:#fff;padding-left:100px">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="bs-navbar-collapse" >
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/" style="color:#fff">SSECTA</a>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li ><p class="navbar-text">您好！　</p></li>
+				<li ><p class="navbar-text"><b>{{navusername}}</b></p></li>
+				<form class="navbar-form navbar-left" role="search" method="GET" action="/show/">
+					<div class="form-group">
+						{% csrf_token %}
+						<input type="text" class="form-control" placeholder="输入题号（带字母）" value="" name = "qname" onfocus="if(value=='输入题号（带字母）…') {value=''}" onblur="if(value=='') {value='输入题号（带字母）…'}">
+					</div>
+					<button type="submit" class="btn btn-default">查看</button>
+				</form>
+			</ul>
+			<ul class="nav navbar-nav navbar-right" >
+				{% if canpublish %}
+					<li><a href="/accounts/realauth/" style="color:#fff">实名认证</a></li>
+					<li><a href="/post/" style="color:#fff">发布解题指导</a></li>
+				{% endif %}
+				<li><a href="/accounts/userinfo/?id={{navuserid}}" style="color:#fff">个人信息</a></li>
+				<li><a href="/accounts/logout/" style="color:#fff">登出</a></li>
+				<li><a href="/help/" style="color:#fff">帮助&留言</a></li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</nav>
+	<header class="jumbotron subhead" id="overview" style="background-color:#3498db;color:#fff">
+		<div class="container">
+			<h1>SSECTA</h1>
+			<p>HIT SSE C语言Train 训练助手</p>
+		</div>
+	</header>
+	
+	<div class="container">
+		<div class="col-sm-8 col-sm-offset-2 table-responsive">
+			<table class="table table-bordered">
+				<tr>
+					<th height="40" colspan="6">按类查看&nbsp;&nbsp;&nbsp;<a href="/annoy/">错题列表（共{{annoynumber}}题）</a></th>
+				</tr>
+				<tr>
+					<td width="150" height="50"><a href="/all">全部（共{{totalproblemnumber}}题）</a></td>
+					<td width="150">循环控制结构</td>
+					<td width="150">基本类型变量作函数参数</td>
+					<td width="150">数据类型、运算符与表达式</td>
+					<td width="150">键盘输入和屏幕输出</td>
+					<td width="150">选择控制结构</td>
+				</tr>
+				<tr>
+					<td height="50">一维数组作函数参数</td>
+					<td width="150">一维数组</td>
+					<td width="150">二维数组</td>
+					<td width="150">流程转移控制</td>
+					<td width="150">字符数组作函数参数</td>
+					<td width="150">动态数据结构</td>
+				</tr>
+				<tr>
+					<td height="50">结构体</td>
+					<td width="150">字符数组</td>
+					<td width="150">简单指针变量</td>
+					<td width="150">递归函数</td>
+					<td width="150">函数</td>
+					<td width="150">函数指针</td>
+				</tr>
+				<tr>
+					<td height="50">指针变量作函数参数</td>
+					<td width="150">第3章</td>
+					<td width="150">第6章</td>
+					<td width="150">第8章</td>
+					<td width="150">第10章</td>
+					<td width="150">第12章</td>
+				</tr>
+				<tr>
+					<td height="50">变量的作用域和存储类型</td>
+					<td width="150">第7章</td>
+					<td width="150">第5章</td>
+					<td width="150">第4章</td>
+					<td width="150">动态内存分配</td>
+					<td width="150">第9章</td>
+				</tr>
+				<tr>
+					<td height="50">指针数组</td>
+					<td>二维数组做函数参数</td>
+					<td>字符指针作函数参数</td>
+					<td>第11章</td>
+					<td>动态数组</td>
+					<td>实验</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+		<footer class="bs-footer" role="contentinfo" style="background-color:#eeeeee">
+		<div class="container">
+
+		<h4 align="center"> CS2013@HIT <a href="http://yumendy.com/">段艺</a> <a href="http://vivid.name/">杨志飞</a> ©2014</h4>
+		</div>
+		</footer>
+	</body>
+</html>

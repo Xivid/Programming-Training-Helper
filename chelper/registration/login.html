@@ -1,0 +1,23 @@
+<form action="" method="post">
+  {% csrf_token %}
+  <table border = 0 id="loginform">
+    <tr>
+	<td>用户名：</td>
+    <td><input type="text" name="username" value="" id="username"></td>
+	</tr>
+	<tr>
+    <td>密码：</td>
+    <td><input type="password" name="password" value="" id="password"></td>
+	</tr>
+	{% if form.errors %}
+    <tr><td class="msg" colspan=2>
+	用户名或密码错误。</td>
+    </tr>
+	{% endif %}
+	<tr><td colspan=2 class="control">
+    <input type="submit" value="登陆" />
+	<input type="reset" value="重置" />
+    <input type="hidden" name="next" value="/" /></td>
+	</tr>
+  </table>
+  </form>
